@@ -6,17 +6,17 @@
         {
             "name": "Kafein Studio",
             "email": "support@kafein-studio.fr",
-            "homepage": "https://www.kafein-studio.fr"
+            "homepage": "https://kafein.studio"
         }
     ],
-    "homepage": "https://www.kafein-studio.fr",
+    "homepage": "https://kafein.studio",
     "keywords": [
         "Laravel",
         "kafeinstudio",
         "email-preview"
     ],
     "require": {
-        "themsaid/laravel-mail-preview": "^4.0"
+        "spatie/laravel-mail-preview": "^6.0|^4.0|^2.1"
     },
     "autoload": {
         "psr-4": {

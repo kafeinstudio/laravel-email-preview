@@ -42,7 +42,7 @@ class EmailPreviewServiceProvider extends \Illuminate\Support\ServiceProvider
      */
     public function provides()
     {
-        return ['TfsSso'];
+        return [];
     }
 
     /**

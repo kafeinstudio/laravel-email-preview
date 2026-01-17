@@ -8,10 +8,15 @@ use Illuminate\Filesystem\Filesystem;
 
 class EmailPreviewController
 {
-    /**
-     * @return string
-     */
-    public function list()
+    public function __construct()
+    {
+        if (!empty(config('emailpreview.allowedIps')) && !in_array($_SERVER['REMOTE_ADDR'], config('emailpreview.allowedIps'))) {
+            abort(401);
+        }
+    }
+
+
+    public function list(): string
     {
         $this->cleanOldPreviews();
 
@@ -21,20 +26,12 @@ class EmailPreviewController
     }
 
 
-    /**
-     * @param String $emailName
-     * @return string
-     */
     public function show(string $emailName): string
     {
         return file_get_contents(config('emailpreview.path') . '/' . $emailName . '.html');
     }
 
 
-    /**
-     * @param String $emailName
-     * @return string
-     */
     public function download(string $emailName): string
     {
         $file = config('emailpreview.path') . '/' . $emailName . '.eml';
@@ -42,7 +39,7 @@ class EmailPreviewController
         if (file_exists($file)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename='.basename($file));
+            header('Content-Disposition: attachment; filename=' . basename($file));
             header('Content-Transfer-Encoding: binary');
             header('Expires: 0');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
@@ -58,11 +55,6 @@ class EmailPreviewController
     }
 
 
-    /**
-     * Delete previews older than the given life time configuration.
-     *
-     * @return void
-     */
     private function cleanOldPreviews(): void
     {
         try {
