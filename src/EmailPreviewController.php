@@ -5,6 +5,7 @@ namespace KafeinStudio\EmailPreview;
 
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class EmailPreviewController
 {
