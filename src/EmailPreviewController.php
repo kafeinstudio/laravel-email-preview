@@ -32,7 +32,7 @@ class EmailPreviewController
     }
 
 
-    public function download(string $emailName): string
+    public function download(string $emailName): BinaryFileResponse
     {
       $file = config('emailpreview.path') . '/' . $emailName . '.eml';                                                                                                                                                                                                                    
                                                                                                                                                                                                                                                                                           
