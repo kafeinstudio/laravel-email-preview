@@ -45,7 +45,7 @@ class EmailPreviewController
 
     private function cleanOldPreviews(): void
     {
-        if (! $files->isDirectory(config('emailpreview.path'))) {
+        if (!$files->isDirectory(config('emailpreview.path'))) {
             return;
         }
 
