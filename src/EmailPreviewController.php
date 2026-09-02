@@ -34,24 +34,11 @@ class EmailPreviewController
 
     public function download(string $emailName): string
     {
-        $file = config('emailpreview.path') . '/' . $emailName . '.eml';
-
-        if (file_exists($file)) {
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/octet-stream');
-            header('Content-Disposition: attachment; filename=' . basename($file));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($file));
-            ob_clean();
-            flush();
-            readfile($file);
-            exit;
-        }
-
-        abort(404);
+      $file = config('emailpreview.path') . '/' . $emailName . '.eml';                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                          
+      abort_unless(file_exists($file), 404);                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                          
+      return response()->download($file);
     }
 
 
