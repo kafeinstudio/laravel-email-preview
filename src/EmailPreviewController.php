@@ -45,16 +45,16 @@ class EmailPreviewController
 
     private function cleanOldPreviews(): void
     {
-        if (!$files->isDirectory(config('emailpreview.path'))) {
-            return;
-        }
-
         try {
             $files = app()->make(Filesystem::class);
         } catch (BindingResolutionException $e) {
             return;
         }
 
+        if (!$files->isDirectory(config('emailpreview.path'))) {
+            return;
+        }
+        
         $oldPreviews = array_filter($files->files(config('emailpreview.path')), function ($file) use ($files) {
             return time() - $files->lastModified($file) > config('emailpreview.lifeTime');
         });
