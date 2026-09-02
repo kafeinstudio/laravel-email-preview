@@ -45,6 +45,10 @@ class EmailPreviewController
 
     private function cleanOldPreviews(): void
     {
+        if (! $files->isDirectory(config('emailpreview.path'))) {
+            return;
+        }
+
         try {
             $files = app()->make(Filesystem::class);
         } catch (BindingResolutionException $e) {
